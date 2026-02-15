@@ -1,0 +1,97 @@
+/* ==============================================
+   Lab Artist - Cyber Medical Pro (核弹级装修)
+   ============================================== */
+
+/* 1. 全局背景：深邃星空蓝 */
+:root {
+  --vp-c-bg: #0b1120 !important;
+  --vp-c-bg-alt: #161e2e !important; /* 侧边栏颜色 */
+  --vp-c-brand: #38bdf8 !important;  /* 核心亮蓝 */
+  --vp-c-text-1: #f8fafc !important; /* 亮白文字 */
+  --vp-c-text-2: #94a3b8 !important; /* 灰蓝副文 */
+}
+
+/* 2. 暴力美化正文区域 */
+.vp-doc {
+  background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 40%);
+  min-height: 100vh;
+}
+
+/* 3. 标题：渐变流光特效 */
+.vp-doc h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: -webkit-linear-gradient(315deg, #22d3ee 25%, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+}
+
+.vp-doc h2 {
+  color: #e2e8f0 !important;
+  border-bottom: 2px solid rgba(56, 189, 248, 0.3) !important;
+  padding-bottom: 10px;
+  margin-top: 50px !important;
+}
+
+/* 4. 视频容器：悬浮发光盒子 */
+.video-wrapper {
+  margin: 40px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.15) !important; /* 蓝色呼吸光 */
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: #000;
+  transition: transform 0.3s ease;
+}
+
+.video-wrapper:hover {
+  transform: scale(1.02); /* 鼠标悬停轻微放大 */
+  box-shadow: 0 0 50px rgba(56, 189, 248, 0.3) !important;
+}
+
+/* 5. 提示框：磨砂玻璃质感 */
+.custom-block.tip {
+  background: rgba(6, 182, 212, 0.1) !important;
+  border: 1px solid rgba(6, 182, 212, 0.3) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.custom-block.tip p {
+  color: #cffafe !important;
+}
+
+/* 6. 侧边栏：高级半透明 */
+.VPSidebar {
+  background-color: rgba(11, 17, 32, 0.85) !important;
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 7. 顶部导航栏 */
+.VPNavBar {
+  background-color: rgba(11, 17, 32, 0.8) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1) !important;
+}
+
+/* 8. 表格：科技感斑马纹 */
+table {
+  width: 100% !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead tr th {
+  background-color: rgba(56, 189, 248, 0.2) !important;
+  color: #38bdf8 !important;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}

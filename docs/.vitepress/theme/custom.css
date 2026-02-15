@@ -1,0 +1,78 @@
+/* === 基础环境：强制全页面深蓝黑色 === */
+:root {
+  --vp-c-bg: #0b1120 !important;
+  --vp-sidebar-bg-color: #0b1120 !important;
+  --vp-c-bg-soft: #1e293b !important;
+  --vp-c-bg-alt: #0f172a !important;
+  --vp-c-text-1: #ffffff !important;
+  --vp-c-text-2: #cbd5e1 !important;
+}
+
+/* === 表格样式修复 (解决“Pit”行变白看不清的问题) === */
+table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #1e293b !important; }
+th { background-color: #38bdf8 !important; color: #000 !important; font-weight: 800 !important; padding: 12px !important; }
+td { border: 1px solid rgba(255,255,255,0.1) !important; padding: 10px !important; color: #fff !important; }
+/* 强制每一行都是深色，防止出现白色行 */
+tr, tr:nth-child(2n) { background-color: #162135 !important; }
+tr:hover { background-color: #1e293b !important; }
+
+/* === 侧边栏样式 === */
+.VPSidebar { background-color: #0b1120 !important; border-right: 1px solid rgba(255,255,255,0.05) !important; }
+.VPSidebarItem.level-0 > .item > .text { color: #fbbf24 !important; font-weight: 800 !important; }
+.VPSidebarItem.level-1 .text { color: #cbd5e1 !important; }
+
+/* === Mermaid 思维导图：全层级强制点亮 === */
+.mermaid { background: #0f172a !important; border-radius: 12px; padding: 20px; }
+
+/* 针对所有层级的矩形和文字进行暴力染色 */
+.mermaid svg g.mindmap-node rect,
+.mermaid svg g.node rect,
+.mermaid svg .mindmap-node rect {
+    fill: #2e3c51 !important; /* 深蓝色节点 */
+    stroke: #38bdf8 !important;
+    stroke-width: 2px !important;
+}
+
+/* 根节点 (Level 0) 维持金黄 */
+.mermaid svg g.root rect,
+.mermaid svg g[class*="level-0"] rect,
+.mermaid svg .node.level-0 rect {
+    fill: #fbbf24 !important;
+}
+
+/* 强制文字全白清晰 */
+.mermaid svg text,
+.mermaid svg .nodeLabel,
+.mermaid svg .mindmap-node text,
+.mermaid svg div {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,1) !important;
+}
+
+/* 根节点文字黑 */
+.mermaid svg g.root text,
+.mermaid svg g[class*="level-0"] text {
+    fill: #000000 !important;
+    color: #000000 !important;
+}
+
+/* 连线加亮 */
+.mermaid svg path.mindmap-edge,
+.mermaid svg .edgePaths path {
+    stroke: #38bdf8 !important;
+    stroke-width: 3px !important;
+}
+
+/* === 首页卡片 === */
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; padding: 20px; max-width: 1400px; margin: 40px auto; }
+.course-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: 0.4s; text-decoration: none !important; display: flex; flex-direction: column; }
+.course-card:hover { transform: translateY(-8px); border-color: #38bdf8; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+.card-image { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+.card-content { padding: 20px; flex-grow: 1; }
+.card-title { color: #fff; font-size: 1.2rem; font-weight: 800; margin: 0; }
+.card-subtitle { color: #94a3b8; font-size: 0.9rem; font-family: monospace; margin: 8px 0 18px 0; }
+.meta-tag { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-right: 8px; }
+.meta-tag.blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+.meta-tag.gray { background: rgba(255, 255, 255, 0.05); color: #cbd5e1; }
