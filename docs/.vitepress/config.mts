@@ -1785,5 +1785,14 @@ export default withMermaid(defineConfig({
 ],
     socialLinks: [ { icon: 'github', link: 'https://github.com/vuejs/vitepress' } ]
   },
-  mermaid: { theme: 'dark' },
+  // ⚡️ 强制设置导图为深色模式，解决黑屏问题
+  mermaid: { 
+    theme: 'dark',
+    securityLevel: 'loose'
+  },
+  vite: { 
+    optimizeDeps: { 
+      include: ['mermaid', 'vitepress-plugin-mermaid'] 
+    } 
+  }
 }))
