@@ -1,14 +1,15 @@
 import { defineConfig } from 'vitepress'
-        import { withMermaid } from 'vitepress-plugin-mermaid'
-        export default withMermaid(defineConfig({
-          title: "心血管核心知识库",
-          description: "VIP 高阶医学课程",
-          ignoreDeadLinks: true,
-          cleanUrls: true,
-          themeConfig: {
-            search: { provider: 'local' },
-            nav: [ { text: 'Home', link: '/' } ],
-            sidebar: [
+import { withMermaid } from 'vitepress-plugin-mermaid'
+
+export default withMermaid(defineConfig({
+  title: "心血管核心知识库",
+  description: "VIP 高阶医学课程",
+  ignoreDeadLinks: true,
+  cleanUrls: true,
+  themeConfig: {
+    search: { provider: 'local' },
+    nav: [ { text: 'Home', link: '/' } ],
+    sidebar: [
   {
     "text": "专辑 01：心脏解剖学实景课 (Heart Anatomy - Course)",
     "collapsed": true,
@@ -1782,7 +1783,7 @@ import { defineConfig } from 'vitepress'
     ]
   }
 ],
-            socialLinks: [ { icon: 'github', link: 'https://github.com/vuejs/vitepress' } ]
-          },
-          mermaid: { theme: 'dark' },
-        }))
+    socialLinks: [ { icon: 'github', link: 'https://github.com/vuejs/vitepress' } ]
+  },
+  mermaid: { theme: 'dark' },
+}))
