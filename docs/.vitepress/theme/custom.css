@@ -1,10 +1,17 @@
-/* ================= 全局样式 ================= */
+/* ================= 全局变量 ================= */
 :root {
   --vp-c-bg: #0b1120 !important;       
   --vp-sidebar-bg-color: #0b1120 !important;
   --vp-c-brand: #38bdf8 !important;    
-  /* 侧边栏宽度保持 350px，给单行文字足够空间 */
-  --vp-sidebar-width: 350px !important; 
+  /* 默认宽度 (小屏用) */
+  --vp-sidebar-width: 280px !important; 
+}
+
+/* 💻 大屏幕 (宽度大于 1400px) 时，才用霸气的 350px */
+@media (min-width: 1400px) {
+  :root {
+    --vp-sidebar-width: 350px !important; 
+  }
 }
 
 body {
@@ -13,69 +20,68 @@ body {
   color: #fff !important;
 }
 
-/* ================= 侧边栏美化 (单行版) ================= */
-.VPSidebar { border-right: 1px solid rgba(255,255,255,0.05) !important; }
+/* ================= 侧边栏 (死死贴左版) ================= */
+.VPSidebar { 
+    border-right: 1px solid rgba(255,255,255,0.05) !important;
+    left: 0 !important; /* 强制贴左 */
+    margin-left: 0 !important; /* 清除边距 */
+    padding-left: 0 !important; /* 清除内边距 */
+    overflow-x: hidden !important; /* 防止横向滚动条 */
+}
 
 /* 1. 专辑大标题 */
 .VPSidebarItem.level-0 > .item > .text {
   font-size: 1.1rem !important; 
   font-weight: 800 !important; 
   color: #fbbf24 !important;
-  padding: 20px 0 10px 0 !important;
+  padding: 15px 20px !important; /* 增加内部空间 */
   border-bottom: 1px solid rgba(255,255,255,0.05); 
-  /* 强制单行 */
-  white-space: nowrap !important; 
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  white-space: normal !important; 
+  line-height: 1.3 !important;
 }
 
-/* 2. 视频子标题 (强制单行) */
+/* 2. 视频子标题 */
 .VPSidebarItem.level-1 .VPLink {
   padding: 8px 0 !important; 
-  border-left: 3px solid transparent; 
-  padding-left: 15px !important;
+  border-left: 4px solid transparent; /* 左侧指示条加宽 */
+  padding-left: 10px !important; /* 稍微缩进 */
 }
 
 .VPSidebarItem.level-1 .VPLink .text { 
   color: #cbd5e1 !important; 
-  font-size: 0.95rem !important; 
-  line-height: 1.5 !important;
+  font-size: 0.9rem !important; 
   
-  /* 🌟 核心修改：强制不换行，超出显示省略号 */
-  white-space: nowrap !important; 
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  /* 🌟 自动换行，且行距适中 */
+  white-space: normal !important; 
+  line-height: 1.4 !important;
   display: block !important;
+  width: 100%;
 }
 
-/* 鼠标悬停时显示完整文字 (可选，为了防止看不全) */
-.VPSidebarItem.level-1 .VPLink:hover .text { 
-  color: #38bdf8 !important; 
-  /* 如果你想悬停时自动换行看全，把下面这行注释取消 */
-  /* white-space: normal !important; */
-}
-
+.VPSidebarItem.level-1 .VPLink:hover .text { color: #38bdf8 !important; }
 .VPSidebarItem.level-1 .VPLink.active {
-  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%);
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.15) 0%, transparent 100%);
   border-left-color: #38bdf8;
 }
 .VPSidebarItem.level-1 .VPLink.active .text { color: #38bdf8 !important; font-weight: 700 !important; }
 
-/* ================= 必须保留的 Mermaid 样式 ================= */
+/* ================= Mermaid 导图 (V10 兼容版) ================= */
 .mermaid { 
-    background: #0f172a !important; border-radius: 12px; padding: 30px; 
-    display: flex !important; justify-content: center; margin: 30px 0;
+    background: rgba(255, 255, 255, 0.03) !important; 
+    border-radius: 12px; 
+    padding: 20px; 
+    display: flex; 
+    justify-content: center; 
+    margin: 30px 0;
 }
-.mermaid svg { min-width: 100px !important; max-width: 100% !important; height: auto !important; }
-.mermaid svg g.mindmap-node rect, .mermaid svg g.node rect { fill: #1e293b !important; stroke: #38bdf8 !important; stroke-width: 2px !important; }
-.mermaid svg text, .mermaid svg .nodeLabel { fill: #ffffff !important; color: #ffffff !important; font-weight: 600 !important; }
-.mermaid svg g.root rect { fill: #fbbf24 !important; stroke: #fbbf24 !important; }
-.mermaid svg g.root text { fill: #000000 !important; }
-.mermaid svg path.mindmap-edge { stroke: #38bdf8 !important; stroke-width: 3px !important; }
+.mermaid svg text, .mermaid svg .nodeLabel { 
+    fill: #ffffff !important; 
+    color: #ffffff !important; 
+}
 
 /* ================= 其他组件 ================= */
-/* 首页卡片 */
-.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 20px; max-width: 1400px; margin: 0 auto; }
+/* 卡片和表格保持不变 */
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto; }
 .course-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; text-decoration: none !important; display: flex; flex-direction: column; position: relative; }
 .course-card:hover { transform: translateY(-5px); border-color: #38bdf8; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .card-image { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; text-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative; }
@@ -87,8 +93,8 @@ body {
 .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
 .meta-tag.gray { background: rgba(255, 255, 255, 0.1); color: #cbd5e1; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
 .arrow-icon { color: #38bdf8; font-weight: 700; font-size: 0.8rem; }
-.custom-block.tip { background-color: rgba(56, 189, 248, 0.1) !important; border: 1px solid rgba(56, 189, 248, 0.5) !important; border-radius: 12px; color: #ffffff !important; }
 table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #1e293b !important; }
 th { background-color: #38bdf8 !important; color: #000 !important; font-weight: 800 !important; padding: 12px !important; }
 td { border: 1px solid rgba(255,255,255,0.1) !important; padding: 10px !important; color: #fff !important; }
 tr, tr:nth-child(2n) { background-color: #162135 !important; }
+.custom-block.tip { background-color: rgba(56, 189, 248, 0.1) !important; border: 1px solid rgba(56, 189, 248, 0.5) !important; border-radius: 12px; color: #ffffff !important; }

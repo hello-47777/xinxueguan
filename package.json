@@ -17,7 +17,7 @@
     "vitepress-sidebar": "^1.33.1"
   },
   "dependencies": {
-    "mermaid": "^11.12.2",
+    "mermaid": "^10.9.1",
     "vitepress-plugin-mermaid": "^2.0.17"
   }
 }
