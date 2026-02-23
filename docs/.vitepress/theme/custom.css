@@ -3,8 +3,7 @@
   --vp-c-bg: #0b1120 !important;       
   --vp-sidebar-bg-color: #0b1120 !important;
   --vp-c-brand: #38bdf8 !important;    
-  
-  /* ⚡️ 核心修改：侧边栏宽度加宽到 350px，方便截图 */
+  /* ⚡️ 侧边栏宽度 */
   --vp-sidebar-width: 350px !important; 
 }
 
@@ -14,30 +13,18 @@ body {
   color: #fff !important;
 }
 
-/* ================= 侧边栏美化 (列表风) ================= */
+/* ================= 侧边栏美化 ================= */
 .VPSidebar { border-right: 1px solid rgba(255,255,255,0.05) !important; }
-
-/* 专辑大标题 */
 .VPSidebarItem.level-0 > .item > .text {
-  font-size: 1.1rem !important; 
-  font-weight: 800 !important; 
-  color: #fbbf24 !important;
-  margin-bottom: 10px !important; 
-  padding-top: 20px !important;
-  border-bottom: 1px solid rgba(255,255,255,0.05); 
-  display: block;
+  font-size: 1.1rem !important; font-weight: 800 !important; color: #fbbf24 !important;
+  margin-bottom: 10px !important; padding-top: 20px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05); display: block;
 }
-
-/* 视频子标题 (加宽后显示更多字) */
 .VPSidebarItem.level-1 .VPLink {
-  padding: 8px 0 !important; 
-  border-left: 3px solid transparent; 
-  padding-left: 15px !important;
+  padding: 8px 0 !important; border-left: 3px solid transparent; padding-left: 15px !important;
 }
 .VPSidebarItem.level-1 .VPLink .text { 
-  color: #cbd5e1 !important; 
-  font-size: 0.95rem !important; 
-  line-height: 1.4 !important; /* 增加行高，更好看 */
+  color: #cbd5e1 !important; font-size: 0.95rem !important; line-height: 1.4 !important;
 }
 .VPSidebarItem.level-1 .VPLink:hover .text { color: #38bdf8 !important; }
 .VPSidebarItem.level-1 .VPLink.active {
@@ -46,8 +33,7 @@ body {
 }
 .VPSidebarItem.level-1 .VPLink.active .text { color: #38bdf8 !important; font-weight: 700 !important; }
 
-
-/* ================= 首页卡片样式 (YouTube 封面版) ================= */
+/* ================= 首页卡片 (封面图版) ================= */
 .course-grid { 
     display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
     gap: 25px; padding: 20px; max-width: 1400px; margin: 0 auto; 
@@ -60,42 +46,19 @@ body {
 .course-card:hover { 
     transform: translateY(-5px); border-color: #38bdf8; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
 }
-
-/* 图片区域：改为 16:9 比例 (约 180px 高) */
 .card-image { 
-    height: 180px; 
-    display: flex; align-items: center; justify-content: center; 
-    font-size: 3rem; text-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-    position: relative; /* 为了放标签 */
+    height: 180px; display: flex; align-items: center; justify-content: center; 
+    font-size: 3rem; text-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative;
 }
-
-/* 图片上的标签 (ALBUM 01) - 无论背景多花都能看清 */
 .image-overlay {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    gap: 5px;
+    position: absolute; bottom: 10px; right: 10px; display: flex; gap: 5px;
 }
 .dark-badge {
-    background: rgba(0, 0, 0, 0.75); /* 深黑半透明底色 */
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.2);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 4px;
-    backdrop-filter: blur(2px); /* 磨砂玻璃效果 */
+    background: rgba(0, 0, 0, 0.75); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; backdrop-filter: blur(2px);
 }
-
-/* 内容区域 */
-.card-content { 
-    padding: 20px; flex-grow: 1; display: flex; flex-direction: column; 
-}
-.card-title { 
-    color: #fff; font-size: 1.25rem; font-weight: 800; margin: 0 0 6px 0; 
-    line-height: 1.3;
-}
+.card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+.card-title { color: #fff; font-size: 1.25rem; font-weight: 800; margin: 0 0 6px 0; line-height: 1.3; }
 .card-subtitle {
     color: #94a3b8; font-size: 0.9rem; font-weight: 500; margin: 0 0 15px 0; 
     font-family: monospace; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
@@ -107,15 +70,13 @@ body {
 .meta-tag.gray { background: rgba(255, 255, 255, 0.1); color: #cbd5e1; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
 .arrow-icon { color: #38bdf8; font-weight: 700; font-size: 0.8rem; }
 
-/* ================= 其他保留样式 ================= */
-table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #1e293b !important; }
-th { background-color: #38bdf8 !important; color: #000 !important; font-weight: 800 !important; padding: 12px !important; }
-td { border: 1px solid rgba(255,255,255,0.1) !important; padding: 10px !important; color: #fff !important; }
-tr, tr:nth-child(2n) { background-color: #162135 !important; }
-.mermaid { background: #0f172a !important; border-radius: 12px; padding: 20px; }
-.mermaid svg g.mindmap-node rect, .mermaid svg g.node rect { fill: #2e3c51 !important; stroke: #38bdf8 !important; stroke-width: 2px !important; }
-.mermaid svg text, .mermaid svg .nodeLabel { fill: #ffffff !important; color: #ffffff !important; font-weight: 600 !important; }
-.mermaid svg g.root rect { fill: #fbbf24 !important; }
-.mermaid svg g.root text { fill: #000000 !important; }
-.mermaid svg path.mindmap-edge { stroke: #38bdf8 !important; stroke-width: 3px !important; }
-.custom-block.tip { background-color: rgba(56, 189, 248, 0.1) !important; border: 1px solid rgba(56, 189, 248, 0.5) !important; border-radius: 12px; color: #ffffff !important; }
+/* ================= 🧠 Mermaid 思维导图 (必须加回来！) ================= */
+.mermaid { 
+    background: #0f172a !important; border-radius: 12px; padding: 30px; 
+    display: flex; justify-content: center; margin: 30px 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+.mermaid svg { min-width: 800px !important; }
+
+/* 节点样式 */
+.mermaid svg g.mindmap-no
