@@ -1,10 +1,14 @@
 import DefaultTheme from 'vitepress/theme'
-import './custom.css' // 👈 这一行保证 CSS 生效
+import { onMounted, watch, nextTick } from 'vue'
+import { useRoute } from 'vitepress'
+import './custom.css' // 👈 载入你的装修样式
 
 export default {
   extends: DefaultTheme,
-  // 👇 这一段是让 Mermaid 正常工作的关键
   setup() {
-    // 默认行为
+    const route = useRoute()
+    // 这里不需要写复杂的 mermaid 逻辑，
+    // 因为 update_menu.py 里的 config 已经配置了 withMermaid
+    // 这个文件的主要作用是确保 custom.css 被正确加载！
   }
 }

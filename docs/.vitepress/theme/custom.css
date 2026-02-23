@@ -3,13 +3,8 @@
   --vp-c-bg: #0b1120 !important;       
   --vp-sidebar-bg-color: #0b1120 !important;
   --vp-c-brand: #38bdf8 !important;    
-}
-
-/* ⚡️ 响应式侧边栏：大屏宽，小屏自动适应 */
-@media (min-width: 960px) {
-  :root {
-    --vp-sidebar-width: 350px !important; 
-  }
+  /* 侧边栏宽度保持 350px，给单行文字足够空间 */
+  --vp-sidebar-width: 350px !important; 
 }
 
 body {
@@ -18,7 +13,7 @@ body {
   color: #fff !important;
 }
 
-/* ================= 侧边栏精修 (解决挤压问题) ================= */
+/* ================= 侧边栏美化 (单行版) ================= */
 .VPSidebar { border-right: 1px solid rgba(255,255,255,0.05) !important; }
 
 /* 1. 专辑大标题 */
@@ -28,66 +23,58 @@ body {
   color: #fbbf24 !important;
   padding: 20px 0 10px 0 !important;
   border-bottom: 1px solid rgba(255,255,255,0.05); 
-  white-space: normal !important; /* 允许换行 */
+  /* 强制单行 */
+  white-space: nowrap !important; 
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-/* 2. 视频子标题 (核心修改：允许换行，增加间距) */
+/* 2. 视频子标题 (强制单行) */
 .VPSidebarItem.level-1 .VPLink {
-  padding: 10px 0 !important; /* 增加上下间距，不拥挤 */
+  padding: 8px 0 !important; 
   border-left: 3px solid transparent; 
   padding-left: 15px !important;
-  height: auto !important; /* 高度自适应 */
 }
 
 .VPSidebarItem.level-1 .VPLink .text { 
   color: #cbd5e1 !important; 
   font-size: 0.95rem !important; 
-  line-height: 1.5 !important; /* 增加行高，阅读更舒服 */
-  white-space: normal !important; /* 🌟 关键：允许文字太长时自动换行，而不是变省略号 */
+  line-height: 1.5 !important;
+  
+  /* 🌟 核心修改：强制不换行，超出显示省略号 */
+  white-space: nowrap !important; 
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
   display: block !important;
 }
 
-.VPSidebarItem.level-1 .VPLink:hover .text { color: #38bdf8 !important; }
+/* 鼠标悬停时显示完整文字 (可选，为了防止看不全) */
+.VPSidebarItem.level-1 .VPLink:hover .text { 
+  color: #38bdf8 !important; 
+  /* 如果你想悬停时自动换行看全，把下面这行注释取消 */
+  /* white-space: normal !important; */
+}
+
 .VPSidebarItem.level-1 .VPLink.active {
   background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%);
   border-left-color: #38bdf8;
 }
 .VPSidebarItem.level-1 .VPLink.active .text { color: #38bdf8 !important; font-weight: 700 !important; }
 
-/* ================= Mermaid 导图修复 (强制显示) ================= */
+/* ================= 必须保留的 Mermaid 样式 ================= */
 .mermaid { 
-    background: #0f172a !important; 
-    border-radius: 12px; 
-    padding: 30px; 
-    display: flex !important; /* 强制显示 */
-    justify-content: center; 
-    margin: 30px 0;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
-    opacity: 1 !important; /* 防止透明 */
-    visibility: visible !important;
+    background: #0f172a !important; border-radius: 12px; padding: 30px; 
+    display: flex !important; justify-content: center; margin: 30px 0;
 }
-/* 确保 SVG 有宽高 */
-.mermaid svg { 
-    min-width: 100px !important; 
-    height: auto !important; 
-    max-width: 100% !important;
-}
-
-/* 节点染色 */
-.mermaid svg g.mindmap-node rect, 
-.mermaid svg g.node rect { 
-    fill: #1e293b !important; stroke: #38bdf8 !important; stroke-width: 2px !important; 
-}
-.mermaid svg text, 
-.mermaid svg .nodeLabel { 
-    fill: #ffffff !important; color: #ffffff !important; font-weight: 600 !important; 
-}
+.mermaid svg { min-width: 100px !important; max-width: 100% !important; height: auto !important; }
+.mermaid svg g.mindmap-node rect, .mermaid svg g.node rect { fill: #1e293b !important; stroke: #38bdf8 !important; stroke-width: 2px !important; }
+.mermaid svg text, .mermaid svg .nodeLabel { fill: #ffffff !important; color: #ffffff !important; font-weight: 600 !important; }
 .mermaid svg g.root rect { fill: #fbbf24 !important; stroke: #fbbf24 !important; }
 .mermaid svg g.root text { fill: #000000 !important; }
 .mermaid svg path.mindmap-edge { stroke: #38bdf8 !important; stroke-width: 3px !important; }
 
 /* ================= 其他组件 ================= */
-/* 首页卡片保持原样 */
+/* 首页卡片 */
 .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 20px; max-width: 1400px; margin: 0 auto; }
 .course-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; text-decoration: none !important; display: flex; flex-direction: column; position: relative; }
 .course-card:hover { transform: translateY(-5px); border-color: #38bdf8; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
