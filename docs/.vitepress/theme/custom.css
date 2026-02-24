@@ -1,48 +1,67 @@
 /* ================= 核心：侧边栏铁钉样式 ================= */
 :root {
-  --vp-sidebar-width: 400px !important; /* ⚡️ 宽度锁死 400px，足够你放翻译 */
+  --vp-sidebar-width: 400px !important; /* 大屏幕宽度锁死 400px，足够放翻译 */
 }
 
 .VPSidebar {
-  width: 400px !important;
-  min-width: 400px !important;
-  max-width: 400px !important;
+  width: var(--vp-sidebar-width) !important;
+  min-width: var(--vp-sidebar-width) !important;
+  max-width: var(--vp-sidebar-width) !important;
   
-  /* ⚡️ 强制固定在左边，不随窗口变窄而消失 */
+  /* 强制固定在左边，不随窗口变窄消失（大屏幕下） */
   position: fixed !important;
   left: 0 !important;
   top: 0 !important;
   bottom: 0 !important;
-  transform: none !important; /* 禁止移动端隐藏动画 */
-  z-index: 9999 !important; /* 层级最高，浮在一切上面 */
+  transform: none !important; 
+  z-index: 9999 !important; 
   
-  /* 样式美化 */
   background-color: #0b1120 !important;
   border-right: 1px solid rgba(255,255,255,0.1) !important;
-  padding-top: var(--vp-nav-height) !important; /* 留出顶部导航栏的高度 */
-  overflow-y: auto !important; /* 内容多了可以滚 */
+  padding-top: var(--vp-nav-height) !important; 
+  overflow-y: auto !important; 
 }
 
-/* ================= 文字排版 (翻译友好型) ================= */
+/* ================= 文字排版 (默认大屏幕：允许换行) ================= */
 .VPSidebarItem.level-1 .VPLink {
-  padding: 12px 10px !important; /* 加大间距，给翻译留位置 */
+  padding: 12px 10px !important; 
   border-left: 4px solid transparent;
 }
 
 .VPSidebarItem.level-1 .VPLink .text {
   color: #e2e8f0 !important;
-  font-size: 1rem !important; /* 字号加大 */
-  line-height: 1.6 !important; /* 行高加大 */
+  font-size: 1rem !important; 
+  line-height: 1.6 !important; 
   
-  /* ⚡️ 允许换行，但因为宽度有400px，通常不会换，除非字特别多 */
+  /* ⚡️ 大屏幕下允许文字自动换行 */
   white-space: normal !important; 
   display: block !important;
 }
 
-/* 选中高亮 */
 .VPSidebarItem.level-1 .VPLink.active {
   background: rgba(56, 189, 248, 0.15) !important;
   border-left-color: #38bdf8 !important;
+}
+
+/* ⚡️⚡️ 响应式：当窗口变窄（小于 960px，如手机端或半屏窗口）触发单行模式 */
+@media (max-width: 960px) {
+  .VPSidebarItem.level-1 .VPLink .text {
+    /* 强制不换行，超出部分显示为省略号 ... */
+    white-space: nowrap !important; 
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important; 
+  }
+  
+  /* 缩小窗口时，取消400px的锁死，让它适应手机屏幕宽度，并恢复默认的滑动动画 */
+  .VPSidebar {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    transform: translateX(-100%) !important; /* 恢复默认的隐藏状态 */
+  }
+  .VPSidebar.open {
+    transform: translateX(0) !important; /* 手机端点击菜单时滑出 */
+  }
 }
 
 /* ================= 必须保留的导图样式 ================= */
@@ -57,7 +76,7 @@
 .mermaid svg text { fill: #fff !important; }
 .mermaid svg .nodeLabel { color: #fff !important; }
 
-/* 其他基础样式 */
+/* 其他基础卡片样式 */
 body { background: #0f172a; color: #fff; }
 .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; padding: 20px; }
 .course-card { background: #1e293b; border-radius: 12px; overflow: hidden; position: relative; }
