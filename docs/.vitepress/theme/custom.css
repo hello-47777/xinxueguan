@@ -1,134 +1,82 @@
-/* ================= 1. 侧边栏宽度与文字换行 (完美兼容原生) ================= */
+/* ================= 1. 强制锁死暗黑模式 (解决网站变白的问题) ================= */
+html, body, .vp-doc {
+  background-color: #0f172a !important; /* 强制深色背景 */
+  color: #f8fafc !important; /* 强制白字 */
+}
+/* 隐藏右上角的太阳/月亮切换按钮，防止误触变白 */
+.VPSwitchAppearance { display: none !important; } 
+
+/* ================= 2. 侧边栏：铁钉模式回归 ================= */
 :root {
-  /* ⚡️ 使用官方变量控制宽度，不要用 fixed 强行固定 */
-  --vp-sidebar-width: 360px; 
+  --vp-sidebar-width: 400px !important;
 }
 
-/* 侧边栏文字：默认大屏幕允许多行 */
+.VPSidebar {
+  width: 400px !important;
+  min-width: 400px !important;
+  max-width: 400px !important;
+  position: fixed !important; /* ⚡️ 铁钉：死死钉在左侧 */
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important; /* ⚡️ 绝对禁止侧边栏滑走或隐藏 */
+  z-index: 9999 !important;
+  background-color: #0b1120 !important;
+  border-right: 1px solid rgba(255,255,255,0.1) !important;
+  padding-top: var(--vp-nav-height) !important;
+  overflow-y: auto !important;
+}
+
+/* ================= 3. 侧边栏文字：宽屏换行，窄屏省略号 ================= */
+.VPSidebarItem.level-1 .VPLink {
+  padding: 12px 10px !important;
+  border-left: 4px solid transparent;
+}
 .VPSidebarItem.level-1 .VPLink .text {
-  font-size: 15px !important;
+  color: #e2e8f0 !important;
+  font-size: 1rem !important;
   line-height: 1.6 !important;
-  white-space: normal !important; 
+  white-space: normal !important; /* 默认：允许换行 */
   display: block !important;
-  padding-top: 4px;
-  padding-bottom: 4px;
 }
-
-/* 选中状态高亮 */
 .VPSidebarItem.level-1 .VPLink.active {
-  background: rgba(56, 189, 248, 0.1) !important;
-  border-left: 3px solid #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.15) !important;
+  border-left-color: #38bdf8 !important;
 }
 
-/* ⚡️ 响应式：屏幕变窄时，恢复单行并加省略号，布局交给官方处理 */
+/* ⚡️ 当窗口宽度小于 960px 时触发（侧边栏依旧在左侧，只有文字变化） */
 @media (max-width: 960px) {
   .VPSidebarItem.level-1 .VPLink .text {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    white-space: nowrap !important; /* 强制不换行 */
+    overflow: hidden !important;    /* 超出隐藏 */
+    text-overflow: ellipsis !important; /* 显示省略号 ... */
   }
 }
 
-/* ================= 2. 修复表格 (Terminology) 白底看不清的问题 ================= */
-.vp-doc table {
-  display: table !important;
-  width: 100% !important;
-  background-color: transparent !important;
-}
-.vp-doc th, .vp-doc td {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #e2e8f0 !important; /* 强制文字变亮 */
-  background-color: #1e293b !important; /* 暗色背景 */
-  padding: 12px !important;
-}
-.vp-doc th {
-  background-color: #0f172a !important; /* 表头更暗一点区分 */
-  font-weight: bold !important;
-}
-
-/* ================= 3. 修复 "核心考点" 颜色太暗的问题 ================= */
-/* 针对 VitePress 默认的 info / tip / warning 区块增强对比度 */
-.vp-doc .custom-block {
-  background-color: rgba(56, 189, 248, 0.1) !important; /* 提亮背景 */
-  border-color: #38bdf8 !important;
-  color: #f8fafc !important; /* 基础文字变白 */
-}
-.vp-doc .custom-block p, 
-.vp-doc .custom-block li {
-  color: #e2e8f0 !important; /* 段落和列表文字变亮 */
-  font-size: 0.95rem !important;
-}
-.vp-doc .custom-block .custom-block-title {
-  color: #38bdf8 !important; /* 标题用亮蓝色 */
-  font-weight: bold !important;
-}
-
-/* ================= 4. 知识图谱 (Mermaid) 基础容器样式 ================= */
+/* ================= 4. 知识图谱 & 核心考点 (强制暗黑高对比) ================= */
 .mermaid {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
   border-radius: 8px;
   padding: 20px;
   margin: 20px 0;
-  overflow-x: auto; /* 图谱太大时可以横向滚动 */
+  overflow-x: auto;
+}
+.mermaid svg text, .mermaid svg .nodeLabel {
+  fill: #fff !important; 
+  color: #fff !important;
 }
 
-/* ================= 5. 首页卡片样式 (保持不变) ================= */
+.vp-doc .custom-block { background-color: rgba(56, 189, 248, 0.1) !important; border-color: #38bdf8 !important; }
+.vp-doc .custom-block p, .vp-doc .custom-block li { color: #e2e8f0 !important; }
+
+/* ================= 5. 首页卡片 (完全恢复你最开始的设计) ================= */
 .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; padding: 20px; }
-.course-card { background: #1e293b; border-radius: 12px; overflow: hidden; position: relative; display: block; text-decoration: none !important; transition: transform 0.2s; }
-.course-card:hover { transform: translateY(-5px); }
-.card-image { height: 180px; background-size: cover; background-position: center; position: relative; }
+.course-card { background: #1e293b !important; border-radius: 12px; overflow: hidden; position: relative; text-decoration: none !important; display: block;}
+.card-image { height: 180px; background-size: cover; background-position: center; position: relative; font-size: 1.5rem; padding: 10px; } /* 添加了 padding 适配你的 emoji 图标 */
 .image-overlay { position: absolute; bottom: 10px; right: 10px; }
 .dark-badge { background: rgba(0,0,0,0.8); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
 .card-content { padding: 15px; }
-.card-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; color: #fff; margin-top: 0; }
-.card-subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px; }
-.card-footer { display: flex; justify-content: space-between; color: #cbd5e1; font-size: 0.8rem; }
-/* ================= 6. 强制点亮知识导图 (防黑屏/隐身补丁) ================= */
-.mermaid {
-  background: rgba(15, 23, 42, 0.8) !important; /* 深邃的底色 */
-  border: 1px solid rgba(56, 189, 248, 0.2) !important; /* 微微的蓝边 */
-  border-radius: 12px;
-  padding: 20px;
-  margin: 24px 0;
-  overflow-x: auto; 
-}
-
-/* 强制 SVG 充满容器并居中 */
-.mermaid svg {
-  max-width: 100% !important;
-  display: block;
-  margin: 0 auto;
-}
-
-/* ⚡️⚡️ 强制文字变成亮白色，绝不隐身 */
-.mermaid svg text, 
-.mermaid svg .nodeLabel,
-.mermaid svg .edgeLabel {
-  fill: #f8fafc !important; 
-  color: #f8fafc !important;
-  text-shadow: none !important; /* 去除某些主题自带的奇怪阴影 */
-}
-
-/* 强制连线和箭头变成科技蓝 */
-.mermaid svg path {
-  stroke: #38bdf8 !important;
-}
-.mermaid svg marker path {
-  fill: #38bdf8 !important;
-  stroke: none !important;
-}
-
-/* 强制节点框变成暗蓝底+亮蓝边 */
-.mermaid svg .node rect, 
-.mermaid svg .node circle, 
-.mermaid svg .node polygon {
-  fill: #1e293b !important; 
-  stroke: #38bdf8 !important;
-  stroke-width: 2px !important;
-}
-
-/* 修复由于主题冲突可能导致的透明底色报错 */
-.mermaid .label {
-  color: #fff !important;
-}
+.card-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; color: #fff !important; }
+.card-subtitle { color: #94a3b8 !important; font-size: 0.9rem; margin-bottom: 15px; }
+.card-footer { display: flex; justify-content: space-between; color: #cbd5e1 !important; font-size: 0.8rem; }
