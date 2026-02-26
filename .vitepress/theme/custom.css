@@ -1,23 +1,92 @@
 /* ==============================================
-   Lab Artist - Cyber Medical Pro (核弹级装修)
+   Lab Artist - Cyber Medical Pro (核弹特效 + 铁钉排版 融合版)
    ============================================== */
 
-/* 1. 全局背景：深邃星空蓝 */
+/* ================= 1. 全局背景与核心变量 ================= */
 :root {
   --vp-c-bg: #0b1120 !important;
-  --vp-c-bg-alt: #161e2e !important; /* 侧边栏颜色 */
-  --vp-c-brand: #38bdf8 !important;  /* 核心亮蓝 */
-  --vp-c-text-1: #f8fafc !important; /* 亮白文字 */
-  --vp-c-text-2: #94a3b8 !important; /* 灰蓝副文 */
+  --vp-c-bg-alt: #161e2e !important; 
+  --vp-c-brand: #38bdf8 !important;  
+  --vp-c-text-1: #f8fafc !important; 
+  --vp-c-text-2: #94a3b8 !important; 
+  
+  /* ⚡️ 铁钉：侧边栏宽度锁死 400px */
+  --vp-sidebar-width: 400px !important; 
 }
 
-/* 2. 暴力美化正文区域 */
+/* 暴力美化正文区域 */
 .vp-doc {
   background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 40%);
   min-height: 100vh;
 }
 
-/* 3. 标题：渐变流光特效 */
+/* ================= 2. 侧边栏：铁钉定位 + 磨砂玻璃特效 ================= */
+.VPSidebar {
+  /* 赛博特效：高级半透明磨砂 */
+  background-color: rgba(11, 17, 32, 0.85) !important;
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+
+  /* 铁钉布局：绝对固定在左侧，不随缩放移动 */
+  width: var(--vp-sidebar-width) !important;
+  min-width: var(--vp-sidebar-width) !important;
+  max-width: var(--vp-sidebar-width) !important;
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  z-index: 9999 !important;
+  padding-top: var(--vp-nav-height) !important;
+}
+
+/* ⚡️ 防止侧边栏遮挡右侧内容（只对带侧边栏的页面生效，不误伤首页） */
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+  }
+}
+
+/* 侧边栏文字：宽屏换行，窄屏省略号 */
+.VPSidebarItem.level-1 .VPLink .text {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  white-space: normal !important; 
+  display: block !important;
+}
+
+/* 响应式：屏幕缩小到 960px 以下时，恢复手机端逻辑 */
+@media (max-width: 960px) {
+  .VPSidebarItem.level-1 .VPLink .text {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .VPSidebar {
+    width: 100vw !important; 
+    transform: translateX(-100%) !important; /* 手机端默认隐藏 */
+  }
+  .VPSidebar.open {
+    transform: translateX(0) !important; /* 滑出菜单 */
+  }
+  .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+}
+
+/* ================= 3. 首页封面卡片 (找回丢失的专辑排版) ================= */
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; padding: 20px; }
+.course-card { background: #1e293b !important; border-radius: 12px; overflow: hidden; position: relative; text-decoration: none !important; display: block; border: 1px solid rgba(56, 189, 248, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2); }
+.card-image { height: 180px; background-size: cover; background-position: center; position: relative; font-size: 1.5rem; padding: 10px; }
+.image-overlay { position: absolute; bottom: 10px; right: 10px; }
+.dark-badge { background: rgba(0,0,0,0.8); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px); }
+.card-content { padding: 15px; }
+.card-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; color: #fff !important; }
+.card-subtitle { color: #94a3b8 !important; font-size: 0.9rem; margin-bottom: 15px; }
+.card-footer { display: flex; justify-content: space-between; color: #38bdf8 !important; font-size: 0.8rem; font-weight: bold; }
+
+/* ================= 4. 赛博光效：标题、视频与表格 ================= */
 .vp-doc h1 {
   font-size: 2.5rem;
   font-weight: 800;
@@ -27,7 +96,6 @@
   margin-bottom: 30px;
   letter-spacing: -1px;
 }
-
 .vp-doc h2 {
   color: #e2e8f0 !important;
   border-bottom: 2px solid rgba(56, 189, 248, 0.3) !important;
@@ -35,63 +103,27 @@
   margin-top: 50px !important;
 }
 
-/* 4. 视频容器：悬浮发光盒子 */
 .video-wrapper {
-  margin: 40px 0;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(56, 189, 248, 0.15) !important; /* 蓝色呼吸光 */
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  background: #000;
-  transition: transform 0.3s ease;
+  margin: 40px 0; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.15) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3); background: #000; transition: transform 0.3s ease;
 }
+.video-wrapper:hover { transform: scale(1.02); box-shadow: 0 0 50px rgba(56, 189, 248, 0.3) !important; }
 
-.video-wrapper:hover {
-  transform: scale(1.02); /* 鼠标悬停轻微放大 */
-  box-shadow: 0 0 50px rgba(56, 189, 248, 0.3) !important;
-}
-
-/* 5. 提示框：磨砂玻璃质感 */
 .custom-block.tip {
   background: rgba(6, 182, 212, 0.1) !important;
   border: 1px solid rgba(6, 182, 212, 0.3) !important;
-  border-radius: 12px !important;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 12px !important; backdrop-filter: blur(10px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
+.custom-block.tip p { color: #cffafe !important; }
 
-.custom-block.tip p {
-  color: #cffafe !important;
-}
+.VPNavBar { background-color: rgba(11, 17, 32, 0.8) !important; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(56, 189, 248, 0.1) !important; }
 
-/* 6. 侧边栏：高级半透明 */
-.VPSidebar {
-  background-color: rgba(11, 17, 32, 0.85) !important;
-  backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
-}
+table { width: 100% !important; border: 1px solid rgba(148, 163, 184, 0.2) !important; border-radius: 8px; overflow: hidden; }
+thead tr th { background-color: rgba(56, 189, 248, 0.2) !important; color: #38bdf8 !important; font-weight: bold; }
+tbody tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.03) !important; }
+tbody tr td { color: #f8fafc !important; }
 
-/* 7. 顶部导航栏 */
-.VPNavBar {
-  background-color: rgba(11, 17, 32, 0.8) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.1) !important;
-}
-
-/* 8. 表格：科技感斑马纹 */
-table {
-  width: 100% !important;
-  border: 1px solid rgba(148, 163, 184, 0.2) !important;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-thead tr th {
-  background-color: rgba(56, 189, 248, 0.2) !important;
-  color: #38bdf8 !important;
-  font-weight: bold;
-}
-
-tbody tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.03) !important;
-}
+/* ================= 5. 保底：知识导图高亮 ================= */
+.mermaid svg text, .mermaid svg .nodeLabel, .mermaid svg span { fill: #ffffff !important; color: #ffffff !important; text-shadow: none !important; }
+.mermaid { background: rgba(11,17,32,0.5); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; padding: 20px; margin: 20px 0;}

@@ -1,15 +1,14 @@
 import { defineConfig } from 'vitepress'
-import { withMermaid } from 'vitepress-plugin-mermaid'
-
-export default withMermaid(defineConfig({
-  title: "心血管核心知识库",
-  description: "VIP 高阶医学课程",
-  ignoreDeadLinks: true,
-  cleanUrls: true,
-  themeConfig: {
-    search: { provider: 'local' },
-    nav: [ { text: 'Home', link: '/' } ],
-    sidebar: [
+        import { withMermaid } from 'vitepress-plugin-mermaid'
+        export default withMermaid(defineConfig({
+          title: "心血管核心知识库",
+          description: "VIP 高阶医学课程",
+          ignoreDeadLinks: true,
+          cleanUrls: true,
+          themeConfig: {
+            search: { provider: 'local' },
+            nav: [ { text: 'Home', link: '/' } ],
+            sidebar: [
   {
     "text": "专辑 01：心脏解剖学实景课 (Heart Anatomy - Course)",
     "collapsed": true,
@@ -1783,16 +1782,7 @@ export default withMermaid(defineConfig({
     ]
   }
 ],
-    socialLinks: [ { icon: 'github', link: 'https://github.com/vuejs/vitepress' } ]
-  },
-  // ⚡️ 强制设置导图为深色模式，解决黑屏问题
-  mermaid: { 
-    theme: 'dark',
-    securityLevel: 'loose'
-  },
-  vite: { 
-    optimizeDeps: { 
-      include: ['mermaid', 'vitepress-plugin-mermaid'] 
-    } 
-  }
-}))
+            socialLinks: [ { icon: 'github', link: 'https://github.com/vuejs/vitepress' } ]
+          },
+          mermaid: { theme: 'dark' },
+        }))
